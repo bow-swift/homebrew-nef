@@ -8,9 +8,18 @@ class Nef < Formula
   depends_on :xcode => "10.0"
 
   def install
+    buildJekyllPage
+
     bin.install "./bin/nef"
     bin.install "./bin/nefc"
     bin.install "./bin/nef-playground"
+    bin.install "./bin/nef-jekyll-page"
+  end
+
+  def buildJekyllPage
+    system "xcodebuild", "-project", "./markdown/JekyllMarkdown.xcodeproj",  "-scheme", "JekyllMarkdown", "clean", "build", "-derivedDataPath", "/tmp/nef"
+    system "mv", "/tmp/nef/Build/Products/Release/JekyllMarkdown", "./bin/nef-jekyll-page"
+    system "rm", "-rf", "/tmp/nef/"
   end
 
 end
