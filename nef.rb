@@ -21,7 +21,7 @@ class Nef < Formula
   end
 
   def build_jekyll_page
-    xcodebuild "-project", "./markdown/JekyllMarkdown.xcodeproj", "-scheme", "JekyllMarkdown", "-configuration", "Release", "clean", "build",
+    xcodebuild "-project", "./markdown/Markdown.xcodeproj", "-scheme", "JekyllMarkdown", "-configuration", "Release", "clean", "build",
     "SYMROOT=/tmp/nef/Build/Products", "-derivedDataPath", "/tmp/nef"
     mv "/tmp/nef/Build/Products/Release/JekyllMarkdown", "./bin/nef-jekyll-page"
     rm "/tmp/nef/", :force => true
