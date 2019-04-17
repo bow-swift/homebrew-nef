@@ -4,7 +4,6 @@ class Nef < Formula
   url "https://github.com/bow-swift/nef/archive/0.1.4.tar.gz"
   sha256 "6a85f474b6c635eb88f62666eafbf1104b87ed370fc3e45d6b28ab3f26e73b2d"
 
-  depends_on "cocoapods"
   depends_on :xcode => "10.0"
 
   def install
