@@ -1,8 +1,8 @@
 class Nef < Formula
   desc "Tool to compile Swift docs written in Playground format with Bow support"
   homepage "https://github.com/bow-swift/nef"
-  url "https://github.com/bow-swift/nef/archive/0.3.0.tar.gz"
-  sha256 "0556227f4ebe81cdfaaa6be394dcad4e5003568144da45d008aded144648fe09"
+  url "https://github.com/bow-swift/nef/archive/0.3.1.tar.gz"
+  sha256 "479e9a82eab1b1ac559bf292512e54709298f23faff48965a24d53fd920e7d0a"
 
   depends_on :xcode => "10.2"
 
