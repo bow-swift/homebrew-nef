@@ -4,7 +4,7 @@ class Nef < Formula
   url "https://github.com/bow-swift/nef/archive/0.3.1.tar.gz"
   sha256 "479e9a82eab1b1ac559bf292512e54709298f23faff48965a24d53fd920e7d0a"
 
-  depends_on :xcode => "10.2"
+  depends_on :xcode => "11.0"
 
   def install
     build_project
