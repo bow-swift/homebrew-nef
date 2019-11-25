@@ -1,8 +1,8 @@
 class Nef < Formula
-  desc "Tool to compile Swift docs written in Playground format with Bow support"
+  desc "💊 steroids for Xcode Playgrounds"
   homepage "https://github.com/bow-swift/nef"
-  url "https://github.com/bow-swift/nef/archive/0.3.2.tar.gz"
-  sha256 "889b533fe976eb4c20eab8cb5b7d12319c4eab0a25c636af3ff9a085e562add6"
+  url "https://github.com/bow-swift/nef/archive/0.4.0.tar.gz"
+  sha256 "1bf4bd964e3f7fe0b93414cee724dccce45b560696c75170d6b7477f44d459dc"
 
   depends_on :xcode => "11.0"
 
@@ -26,26 +26,9 @@ class Nef < Formula
   end
 
   def build_project
-    build_mardown_project
-    build_jekyll_project
-    build_carbon_project
-  end
-
-  def build_mardown_project
-      xcodebuild "-project", "./markdown/Markdown.xcodeproj", "-scheme", "Markdown", "-configuration", "Release", "clean", "build", "SYMROOT=/tmp/nef/Build/Products", "-derivedDataPath", "/tmp/nef"
-      mv "/tmp/nef/Build/Products/Release/Markdown", "./bin/nef-markdown-page"
-      rm "/tmp/nef/", :force => true
-  end
-
-  def build_jekyll_project
-      xcodebuild "-project", "./markdown/Markdown.xcodeproj", "-scheme", "JekyllMarkdown", "-configuration", "Release", "clean", "build", "SYMROOT=/tmp/nef/Build/Products", "-derivedDataPath", "/tmp/nef"
-      mv "/tmp/nef/Build/Products/Release/JekyllMarkdown", "./bin/nef-jekyll-page"
-      rm "/tmp/nef/", :force => true
-  end
-
-  def build_carbon_project
-      xcodebuild "-project", "./markdown/Markdown.xcodeproj", "-scheme", "Carbon", "-configuration", "Release", "clean", "build", "SYMROOT=/tmp/nef/Build/Products", "-derivedDataPath", "/tmp/nef"
-      mv "/tmp/nef/Build/Products/Release/Carbon", "./bin/nef-carbon-page"
-      rm "/tmp/nef/", :force => true
+    system "swift", "build", "--disable-sandbox", "--package-path", "project", "--build-path", "release"
+    FileUtils.cp "./release/x86_64-apple-macosx/debug/nef-markdown-page", "./bin"
+    FileUtils.cp "./release/x86_64-apple-macosx/debug/nef-jekyll-page", "./bin"
+    FileUtils.cp "./release/x86_64-apple-macosx/debug/nef-carbon-page", "./bin"
   end
 end
