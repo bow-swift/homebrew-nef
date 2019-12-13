@@ -28,9 +28,9 @@ class Nef < Formula
 
   def build_project
     system "swift", "build", "--disable-sandbox", "--package-path", "project", "--build-path", "release"
-    FileUtils.cp "./release/x86_64-apple-macosx/debug/nef-markdown-page", "./bin"
-    FileUtils.cp "./release/x86_64-apple-macosx/debug/nef-jekyll-page", "./bin"
-    FileUtils.cp "./release/x86_64-apple-macosx/debug/nef-carbon-page", "./bin"
-    FileUtils.cp "./release/x86_64-apple-macosx/debug/nef-playground-book", "./bin"
+    cp "./release/x86_64-apple-macosx/debug/nef-markdown-page", "./bin"
+    cp "./release/x86_64-apple-macosx/debug/nef-jekyll-page", "./bin"
+    cp "./release/x86_64-apple-macosx/debug/nef-carbon-page", "./bin"
+    cp "./release/x86_64-apple-macosx/debug/nef-playground-book", "./bin"
   end
 end
