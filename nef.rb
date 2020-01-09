@@ -23,14 +23,28 @@ class Nef < Formula
   end
 
   test do
-    print ""
+    project = "#{test_project_path}"
+    chdir(project)
+    tests = shell_output("swift test --disable-sandbox --package-path #{project}/project --configuration debug --build-path tests")
+    assert_match "'All tests' passed", tests
+  end
+
+  def test_project_path
+    version = "0.5.2"
+    url = "https://github.com/bow-swift/nef/archive/#{version}.tar.gz"
+    chdir("#{HOMEBREW_TEMP}")
+    cleanUp = shell_output("rm -rf #{HOMEBREW_TEMP}/nef*")
+    donwloadProject = shell_output("curl -L #{url} --output #{HOMEBREW_TEMP}/nef-#{version}.tar.gz")
+    unzipProject = shell_output("tar xzf #{HOMEBREW_TEMP}/nef-#{version}.tar.gz")
+
+    "#{HOMEBREW_TEMP}/nef-#{version}"
   end
 
   def build_project
-    system "swift", "build", "--disable-sandbox", "--package-path", "project", "--build-path", "release"
-    cp "./release/x86_64-apple-macosx/debug/nef-markdown-page", "./bin"
-    cp "./release/x86_64-apple-macosx/debug/nef-jekyll-page", "./bin"
-    cp "./release/x86_64-apple-macosx/debug/nef-carbon-page", "./bin"
-    cp "./release/x86_64-apple-macosx/debug/nef-playground-book", "./bin"
+    system "swift", "build", "--disable-sandbox", "--package-path", "project", "--configuration", "release", "--build-path", "release"
+    cp "./release/x86_64-apple-macosx/release/nef-markdown-page", "./bin"
+    cp "./release/x86_64-apple-macosx/release/nef-jekyll-page", "./bin"
+    cp "./release/x86_64-apple-macosx/release/nef-carbon-page", "./bin"
+    cp "./release/x86_64-apple-macosx/release/nef-playground-book", "./bin"
   end
 end
