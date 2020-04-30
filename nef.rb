@@ -5,7 +5,6 @@ class Nef < Formula
   sha256 "182d5f91e3048f046a63bf81d148f94acc7c667b5314cf76f36a9fb75efdb3a7"
 
   depends_on :xcode => "11.4"
-  depends_on macos: '>= :mojave'
   
   def install
     system "make", "install", "prefix=#{prefix}", "version=#{version}"
